@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{__${layout}__ :: main('Reports & Analytics', ~{::div})}">
+<head>
+    <title>Reports</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Date Filter -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <form id="reportFilterForm" class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">End Date</label>
+                        <input type="date" class="form-control" id="endDate" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary-custom me-2"><i class="fa-solid fa-filter"></i> Apply Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 4 Chart Cards -->
+        <div class="row g-4 mb-4">
+            <!-- Revenue Line Chart -->
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary-custom">Revenue Trend</h5>
+                        <div style="height: 300px;">
+                            <canvas id="revenueLineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods Doughnut -->
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-success">Payment Methods</h5>
+                        <div style="height: 300px;">
+                            <canvas id="paymentMethodChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room Status Doughnut -->
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-warning text-dark">Room Status</h5>
+                        <div style="height: 300px;">
+                            <canvas id="roomStatusChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Summary (Optional Bar/Table depending on API) -->
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-info">Service Revenue</h5>
+                        <div style="height: 300px; display: flex; align-items: center; justify-content: center;" class="bg-light rounded">
+                            <span class="text-muted"><i class="fa-solid fa-wrench"></i> Pending Service Analytics API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/reports.js"></script>
+</body>
+</html>

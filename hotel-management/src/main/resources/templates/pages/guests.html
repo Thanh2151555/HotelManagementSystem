@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{__${layout}__ :: main('Guest Management', ~{::div})}">
+<head>
+    <title>Guest Management</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header & Add Button -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Guest Management</h4>
+            <button class="btn btn-primary" onclick="GuestModule.openAddModal()">
+                <i class="fa-solid fa-plus me-2"></i> Add New Guest
+            </button>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <form id="guestFilterForm" class="row g-3 align-items-end" onsubmit="event.preventDefault(); GuestModule.loadGuests(0);">
+                    <div class="col-md-8">
+                        <label class="form-label fw-semibold">Search Guest</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="fa-solid fa-search text-muted"></i></span>
+                            <input type="text" class="form-control border-start-0" id="filterKeyword" placeholder="Enter name, phone, or identity number...">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary px-4 me-2">Search</button>
+                        <button type="button" class="btn btn-outline-secondary px-4" onclick="GuestModule.resetSearch()">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">ID</th>
+                                <th>Full Name</th>
+                                <th>Identity Number</th>
+                                <th>Phone</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guestsTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-muted">
+                                    <div class="spinner-border spinner-border-sm text-primary" role="status"></div> Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="card-footer bg-white border-top-0 py-3">
+                <nav>
+                    <ul class="pagination justify-content-end mb-0" id="guestsPagination">
+                        <!-- Pagination buttons injected via JS -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guest Modal -->
+    <div class="modal fade" id="guestModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <form id="guestForm" onsubmit="event.preventDefault(); GuestModule.saveGuest();">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="guestModalTitle">Add Guest</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="guestId" name="id">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Identity Number (CCCD/CMND) <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="identityNumber" name="identityNumber" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btnSaveGuest">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/modules/guests.js"></script>
+</body>
+</html>

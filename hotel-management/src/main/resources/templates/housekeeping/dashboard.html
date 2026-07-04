@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/housekeeping_layout :: main('Housekeeping', ~{::div})}">
+<head>
+    <title>Housekeeping Dashboard</title>
+</head>
+<body>
+    <div class="container-fluid dashboard-container">
+        <h4 class="fw-bold mb-4">Dirty Rooms to Clean</h4>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="dirtyRoomsGrid">
+            <!-- Loading -->
+            <div class="col"><div class="skeleton" style="height: 150px; border-radius: 10px;"></div></div>
+        </div>
+    </div>
+
+    <!-- Script for Housekeeping -->
+    <script src="/js/housekeeping-dashboard.js"></script>
+</body>
+</html>

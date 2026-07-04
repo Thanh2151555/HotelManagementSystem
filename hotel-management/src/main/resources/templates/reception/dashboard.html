@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/reception_layout :: main('Reception Dashboard', ~{::div})}">
+<head>
+    <title>Reception Dashboard</title>
+</head>
+<body>
+    <div class="container-fluid dashboard-container">
+        <!-- Room Map Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Room Map</h4>
+            <div class="d-flex gap-2 align-items-center">
+                <span class="badge bg-success rounded-pill px-3 py-2">Available</span>
+                <span class="badge bg-danger rounded-pill px-3 py-2">Occupied</span>
+                <span class="badge bg-warning text-dark rounded-pill px-3 py-2">Dirty</span>
+                <span class="badge bg-secondary rounded-pill px-3 py-2">Maintenance</span>
+            </div>
+        </div>
+
+        <!-- Room Map Grid -->
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3" id="roomMapGrid">
+            <!-- Skeletons while loading -->
+            <div class="col"><div class="skeleton" style="height: 120px; border-radius: 10px;"></div></div>
+            <div class="col"><div class="skeleton" style="height: 120px; border-radius: 10px;"></div></div>
+            <div class="col"><div class="skeleton" style="height: 120px; border-radius: 10px;"></div></div>
+            <div class="col"><div class="skeleton" style="height: 120px; border-radius: 10px;"></div></div>
+        </div>
+        
+        <!-- Room Action Modal -->
+        <div class="modal fade" id="roomActionModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header border-bottom-0 pb-0">
+                        <h5 class="modal-title fw-bold" id="roomActionModalTitle">Room 101</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column gap-2" id="roomActionButtons">
+                            <!-- Buttons will be injected here by JS based on room status -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Reception Dashboard -->
+    <script src="/js/reception-dashboard.js"></script>
+</body>
+</html>

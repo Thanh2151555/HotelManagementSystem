@@ -1,0 +1,71 @@
+<div th:fragment="sidebar" class="sidebar d-flex flex-column flex-shrink-0 p-3" style="width: 250px;">
+    <a href="/admin/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <i class="fa-solid fa-hotel fs-4 me-2 text-primary-custom"></i>
+        <span class="fs-5 fw-bold">PMS Admin</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item mb-1">
+            <a href="/admin/dashboard" class="nav-link text-white">
+                <i class="fa-solid fa-chart-pie fa-fw me-2"></i> Dashboard
+            </a>
+        </li>
+        <li class="nav-item mb-1">
+            <a href="/admin/rooms" class="nav-link">
+                <i class="fa-solid fa-door-open fa-fw me-2"></i> Rooms
+            </a>
+        </li>
+        <li class="nav-item mb-1">
+            <a href="/admin/reservations" class="nav-link">
+                <i class="fa-solid fa-calendar-check fa-fw me-2"></i> Reservations
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/guests" id="nav-guests">
+                <i class="fa-solid fa-users"></i> Guests
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/payments" id="nav-payments">
+                <i class="fa-solid fa-file-invoice-dollar"></i> Payments
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/reports" id="nav-reports">
+                <i class="fa-solid fa-chart-pie"></i> Reports
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <div>
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong id="sidebarUserName">Admin</strong>
+        </a>
+    </div>
+
+    <!-- Script to set active class dynamically based on current URL -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            navLinks.forEach(link => {
+                // remove existing active class and set text-white as default
+                link.classList.remove('active');
+                
+                if(link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Set user name
+            const userStr = localStorage.getItem('user');
+            if (userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    document.getElementById('sidebarUserName').textContent = user.fullName || user.username;
+                } catch (e) {}
+            }
+        });
+    </script>
+</div>

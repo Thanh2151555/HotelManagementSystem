@@ -1,0 +1,1 @@
+package com.example.hotelmanagement; import org.junit.jupiter.api.Test; import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; public class TestBcrypt { @Test public void test() { System.out.println("HASH=" + new BCryptPasswordEncoder().encode("123456")); } }
